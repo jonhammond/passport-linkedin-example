@@ -9,8 +9,8 @@ var swig = require('swig');
 
 
 // *** routes *** //
-var routes = require('./routes/index.js');
-
+var indexRoutes = require('./routes/index.js');
+var authRoutes  = require('./routes/auth.js');
 
 // *** express instance *** //
 var app = express();
@@ -35,7 +35,8 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 
 // *** main routes *** //
-app.use('/', routes);
+app.use('/', indexRoutes);
+app.use('/auth', authRoutes);
 
 
 // catch 404 and forward to error handler
