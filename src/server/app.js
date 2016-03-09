@@ -52,7 +52,8 @@ passport.use(new LinkedInStrategy({
   state: true
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
-    return done(null, profile);
+    var userInfo = { id: profile.id, displayName: profile.displayName };
+    return done(null, userInfo);
   });
 }));
 
@@ -67,6 +68,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   // here is where you will go to the database and get the 
   // user each time from it's id, after you set up your db
+
   done(null, user)
 });
 
