@@ -49,10 +49,18 @@ passport.use(new LinkedInStrategy({
   clientID: process.env.LINKEDIN_API_KEY,
   clientSecret: process.env.LINKEDIN_SECRET_KEY,
   callbackURL: "http://localhost:3000/auth/linkedin/callback",
+  scope: ['r_emailaddress', 'r_basicprofile'],
   state: true
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
-    var userInfo = { id: profile.id, displayName: profile.displayName };
+    var userInfo = {
+      id: profile.id,
+      email: profile.emails[0].value,
+      displayName: profile.displayName,
+      givenName: profile.name.givenName,
+      familyName: profile.name.familyName,
+      avatar_url: profile.photos[0].value
+    };
     return done(null, userInfo);
   });
 }));

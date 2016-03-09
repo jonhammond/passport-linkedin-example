@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  var name = ( req.user ) ? req.user.displayName : '';
-  res.render('index', { title: 'Hello ' + name })
+  res.render('index', { title: 'LinkedIn & Passport', profile: req.user })
 });
 
 module.exports = router;
